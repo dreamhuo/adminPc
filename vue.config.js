@@ -8,8 +8,6 @@ const resolve = dir => {
 const BASE_URL = process.env.NODE_ENV === 'production'
   ? '/'
   : '/'
-console.log('===========================================')
-console.log(process.env)
 module.exports = {
   publicPath: BASE_URL,
   // 如果你不需要使用eslint，把lintOnSave设为false即可

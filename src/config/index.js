@@ -1,3 +1,22 @@
+import devConf from './dev'
+import uatConf from './uat'
+import testConf from './test'
+import prodConf from './prod'
+let appConf = ''
+switch (process.env.VUE_APP_MODE) {
+  case 'dev':
+    appConf = devConf
+    break
+  case 'test':
+    appConf = testConf
+    break
+  case 'uat':
+    appConf = uatConf
+    break
+  case 'prod':
+    appConf = prodConf
+    break
+}
 export default {
   /**
    * @description 配置显示在浏览器标签的title
@@ -14,12 +33,9 @@ export default {
    */
   useI18n: true,
   /**
-   * @description api请求基础路径
+   * @description 应用业务各环境差异
    */
-  baseUrl: {
-    dev: 'https://www.easy-mock.com/mock/5add9213ce4d0e69998a6f51/iview-admin/',
-    pro: 'https://produce.com'
-  },
+  appConf: appConf,
   /**
    * @description 默认打开的首页的路由name值，默认为home
    */
