@@ -76,11 +76,9 @@ export default {
     // 登录
     handleLogin ({ commit }, { userName, password }) {
       userName = userName.trim()
+      // 请求登录接口，返回 Promise
       return new Promise((resolve, reject) => {
-        login({
-          userName,
-          password
-        }).then(res => {
+        login({ userName, password }).then(res => {
           const data = res.data
           commit('setToken', data.token)
           resolve()
