@@ -27,6 +27,7 @@ class HttpRequest {
     return config
   }
   destroy (url) {
+    // 删除当前队列
     delete this.queue[url]
     if (!Object.keys(this.queue).length) {
       // Spin.hide()
@@ -36,16 +37,18 @@ class HttpRequest {
     // 请求拦截
     instance.interceptors.request.use(config => {
       // 添加全局的loading...
+      // 当前队列中没有，则显示 正在加载动画，有队列说明已经正在显示加载动画
       if (!Object.keys(this.queue).length) {
         // Spin.show() // 不建议开启，因为界面不友好
       }
-      this.queue[url] = true
+      this.queue[url] = true // 将当前请求 url 缓存进队列
       return config
     }, error => {
       return Promise.reject(error)
     })
     // 响应拦截
     instance.interceptors.response.use(res => {
+      // 响应回来了，删除URL; 关闭正在加载效果
       this.destroy(url)
       const { data, status } = res
       return { data, status }
