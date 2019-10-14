@@ -12,21 +12,27 @@ export const login = ({ userName }) => {
   // sig
   let sig = 'N00000042981' + '306a1900-8351-11e9-be8e-d7c4eadf77ef' + timeStamp
   sig = md5(sig)
+  sig = sig.toUpperCase()
   // 座席号
   let exten = '6000'
   // 密码
   let password = '7moor' + 'N00000042981' + exten + '123456aA6000' + timeStamp
-  let passwordT = md5(password.toLowerCase())
+  let passwordT = md5(password)
+  passwordT = passwordT.toLowerCase()
+  console.log('password::::' + passwordT)
 
-  const data = {
+  let data = {
     account: 'N00000042981',
     password: passwordT,
     exten: exten,
-    extentype: null,
+    extentype: 'Local',
     timeStamp: timeStamp,
     module: null
   }
-
+  // console.log(data_1)
+  // let data = {
+  //   userName
+  // }
   return axios.request({
     url: 'https://apis.7moor.com/v20160818/sso/getToken/N00000042981?sig=' + sig,
     data,
