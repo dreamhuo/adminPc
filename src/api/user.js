@@ -6,23 +6,27 @@ let Base64 = require('js-base64').Base64
 export const login = ({ userName }) => {
   let dateObj = new Date()
   const timeStamp = moment(dateObj).format('YYYYMMDDHHmmss')
-  let Authorization = '8000:' + timeStamp
+  // Authorization
+  let Authorization = 'N00000042981:' + timeStamp
   Authorization = Base64.encode(Authorization)
+  // sig
   let sig = '8000' + '306a1900-8351-11e9-be8e-d7c4eadf77ef' + timeStamp
   sig = md5(sig)
-
+  // 座席号
   let exten = '8000'
+  // 密码
   let password = '7moor' + 'N00000042981' + exten + '123abc##8000' + timeStamp
-  let passwordT = md5(password)
+  let passwordT = md5(password.toLowerCase())
 
   const data = {
-    account: '8000',
+    account: 'N00000042981',
     password: passwordT,
     exten: exten,
     extentype: null,
     timeStamp: timeStamp,
     module: null
   }
+
   return axios.request({
     url: 'https://apis.7moor.com/v20160818/sso/getToken/N00000042981?sig=' + sig,
     data,
