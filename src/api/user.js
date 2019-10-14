@@ -5,9 +5,7 @@ let Base64 = require('js-base64').Base64
 
 let dateObj = new Date()
 const timeStamp = moment(dateObj).format('YYYYMMDDHHmmss')
-console.log('timeStamp::' + timeStamp)
 let Authorization = '8000:' + timeStamp
-console.log(Authorization)
 Authorization = Base64.encode(Authorization)
 let sig = '8000' + '306a1900-8351-11e9-be8e-d7c4eadf77ef' + timeStamp
 console.log('sig::::' + sig)
