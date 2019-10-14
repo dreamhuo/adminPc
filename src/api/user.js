@@ -10,12 +10,12 @@ export const login = ({ userName }) => {
   let Authorization = 'N00000042981:' + timeStamp
   Authorization = Base64.encode(Authorization)
   // sig
-  let sig = '8000' + '306a1900-8351-11e9-be8e-d7c4eadf77ef' + timeStamp
+  let sig = 'N00000042981' + '306a1900-8351-11e9-be8e-d7c4eadf77ef' + timeStamp
   sig = md5(sig)
   // 座席号
-  let exten = '8000'
+  let exten = '6000'
   // 密码
-  let password = '7moor' + 'N00000042981' + exten + '123abc##8000' + timeStamp
+  let password = '7moor' + 'N00000042981' + exten + '123456aA6000' + timeStamp
   let passwordT = md5(password.toLowerCase())
 
   const data = {
