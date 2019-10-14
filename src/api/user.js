@@ -1,4 +1,17 @@
 import axios from '@/libs/api.request'
+import md5 from 'js-md5'
+import moment from 'moment'
+let Base64 = require('js-base64').Base64
+
+let dateObj = new Date()
+const timeStamp = moment(dateObj).format('YYYYMMDDHHmmss')
+console.log('timeStamp::' + timeStamp)
+let Authorization = '8000:' + timeStamp
+console.log(Authorization)
+Authorization = Base64.encode(Authorization)
+let sig = '8000' + '306a1900-8351-11e9-be8e-d7c4eadf77ef' + timeStamp
+console.log('sig::::' + sig)
+sig = md5(sig)
 
 export const login = ({ userName, password }) => {
   const data = {
@@ -6,8 +19,12 @@ export const login = ({ userName, password }) => {
     password
   }
   return axios.request({
-    url: 'login',
+    url: 'https://apis.7moor.com/v20160818/sso/getToken/N00000042981?sig=' + sig,
     data,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'Authorization': Authorization
+    },
     method: 'post'
   })
 }
