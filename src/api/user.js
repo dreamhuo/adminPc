@@ -14,9 +14,9 @@ export const login = ({ userName }) => {
   sig = md5(sig)
   sig = sig.toUpperCase()
   // 座席号
-  let exten = '6000'
+  let exten = '8000'
   // 密码
-  let password = '7moor' + 'N00000042981' + exten + '123456aA6000' + timeStamp
+  let password = '7moor' + 'N00000042981' + exten + '123abc##8000' + timeStamp
   let passwordT = md5(password)
   passwordT = passwordT.toLowerCase()
   console.log('password::::' + passwordT)
@@ -29,11 +29,7 @@ export const login = ({ userName }) => {
     timeStamp: timeStamp,
     module: null
   }
-  // console.log(data_1)
-  // let data = {
-  //   userName
-  // }
-  return axios.request({
+  axios.request({
     url: 'https://apis.7moor.com/v20160818/sso/getToken/N00000042981?sig=' + sig,
     data,
     headers: {
@@ -41,6 +37,17 @@ export const login = ({ userName }) => {
       'Authorization': Authorization
     },
     method: 'post'
+  }).then(rtnObj => {
+    console.log(rtnObj)
+    return axios.request({
+      url: 'http://ykf.7moor.com/index/workbench?token=' + rtnObj.data.token,
+      data,
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'Authorization': Authorization
+      },
+      method: 'get'
+    })
   })
 }
 
