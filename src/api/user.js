@@ -3,18 +3,25 @@ import md5 from 'js-md5'
 import moment from 'moment'
 let Base64 = require('js-base64').Base64
 
-let dateObj = new Date()
-const timeStamp = moment(dateObj).format('YYYYMMDDHHmmss')
-let Authorization = '8000:' + timeStamp
-Authorization = Base64.encode(Authorization)
-let sig = '8000' + '306a1900-8351-11e9-be8e-d7c4eadf77ef' + timeStamp
-console.log('sig::::' + sig)
-sig = md5(sig)
+export const login = ({ userName }) => {
+  let dateObj = new Date()
+  const timeStamp = moment(dateObj).format('YYYYMMDDHHmmss')
+  let Authorization = '8000:' + timeStamp
+  Authorization = Base64.encode(Authorization)
+  let sig = '8000' + '306a1900-8351-11e9-be8e-d7c4eadf77ef' + timeStamp
+  sig = md5(sig)
 
-export const login = ({ userName, password }) => {
+  let exten = '8000'
+  let password = '7moor' + 'N00000042981' + exten + '123abc##8000' + timeStamp
+  let passwordT = md5(password)
+
   const data = {
-    userName,
-    password
+    account: '8000',
+    password: passwordT,
+    exten: exten,
+    extentype: null,
+    timeStamp: timeStamp,
+    module: null
   }
   return axios.request({
     url: 'https://apis.7moor.com/v20160818/sso/getToken/N00000042981?sig=' + sig,
