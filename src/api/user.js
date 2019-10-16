@@ -1,6 +1,7 @@
 import axios from '@/libs/api.request'
 import md5 from 'js-md5'
 import moment from 'moment'
+import Fingerprint2 from 'fingerprintjs2'
 let Base64 = require('js-base64').Base64
 
 export const login = ({ userName }) => {
@@ -120,4 +121,33 @@ export const restoreTrash = msg_id => {
       msg_id
     }
   })
+}
+
+const options = {
+  excludes: {
+    userAgent: true,
+    screenResolution: true,
+    colorDepth: true,
+    language: true
+  }
+}
+Fingerprint2.getV18(options, function (result, components) {
+  // result is murmur hash fingerprint
+  console.log('======================================================================================')
+  console.log('result::' + result)
+  // components is array of {key: 'foo', value: 'component value'}
+})
+
+if (window.requestIdleCallback) {
+  requestIdleCallback(function () {
+    Fingerprint2.get(function (components) {
+      console.log(components) // an array of components: {key: ..., value: ...}
+    })
+  })
+} else {
+  setTimeout(function () {
+    Fingerprint2.get(function (components) {
+      console.log(components) // an array of components: {key: ..., value: ...}
+    })
+  }, 500)
 }
