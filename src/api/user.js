@@ -1,9 +1,16 @@
 import axios from '@/libs/api.request'
+// js md5 加密 https://blog.csdn.net/qq_40542728/article/details/95205530
 import md5 from 'js-md5'
+// 日期格式化插件 http://momentjs.cn/
 import moment from 'moment'
+// 设备唯一码生成 https://github.com/Valve/fingerprintjs2
 import Fingerprint2 from 'fingerprintjs2'
+// base64使用
 let Base64 = require('js-base64').Base64
 
+// =====================================================================
+// 登录方法
+// =====================================================================
 export const login = ({ userName }) => {
   let dateObj = new Date()
   const timeStamp = moment(dateObj).format('YYYYMMDDHHmmss')

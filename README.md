@@ -8,6 +8,12 @@ www  WEB版结构如下（或者子目录）==
 │  ├─components          组件
 │  │  ├─login-form      登录模块复用
 │  │  │  └─login-form.vue     初始化SDK，以及封装SDK相关功能的方法 
+│  ├─store                vuex相关配置
+│  │  ├─module            各个模块
+│  │  │  ├─user.js      用户模块存储
+│  │  │  ├─……         其他模块的存储
+│  │  │  └─app.js       app相关的存储
+│  │  └─index.js          在index.js里调用module里的js
 ~~~
 
 
