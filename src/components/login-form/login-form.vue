@@ -56,6 +56,7 @@ export default {
     }
   },
   methods: {
+    // 登录调这个方法，验证通过，则抛出 onSubmit 方法
     handleSubmit () {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {

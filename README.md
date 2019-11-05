@@ -5,6 +5,9 @@ www  WEB版结构如下（或者子目录）==
 ├─src                     项目目录
 │  ├─api                 接口相关
 │  ├─assets              静态资源
+│  ├─libs                类库资源
+│  │  ├─api.request.js      抛出请求方法
+│  │  └─axios.js            主要请求方法在这里封装，主要封装了异常处理，加载处理等
 │  ├─components          组件
 │  │  ├─login-form      登录模块复用
 │  │  │  └─login-form.vue     初始化SDK，以及封装SDK相关功能的方法 
