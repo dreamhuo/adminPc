@@ -2,18 +2,16 @@
   <Form ref="loginForm" :model="form" :rules="rules" @keydown.enter.native="handleSubmit">
     <FormItem prop="userName">
       <Input v-model="form.userName" placeholder="请输入用户名">
-        <span slot="prepend">
-          <Icon :size="16" type="ios-person"></Icon>
-        </span>
+        <span slot="prepend"><Icon :size="16" type="ios-person"></Icon></span>
       </Input>
     </FormItem>
+
     <FormItem prop="password">
       <Input type="password" v-model="form.password" placeholder="请输入密码">
-        <span slot="prepend">
-          <Icon :size="14" type="md-lock"></Icon>
-        </span>
+        <span slot="prepend"><Icon :size="14" type="md-lock"></Icon></span>
       </Input>
     </FormItem>
+
     <FormItem>
       <Button @click="handleSubmit" type="primary" long>登录</Button>
     </FormItem>
@@ -49,6 +47,7 @@ export default {
     }
   },
   computed: {
+    // 这里 rules 可以通过外部传入，没有则用默认值
     rules () {
       return {
         userName: this.userNameRules,
@@ -60,7 +59,7 @@ export default {
     handleSubmit () {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          this.$emit('on-success-valid', {
+          this.$emit('onSubmit', {
             userName: this.form.userName,
             password: this.form.password
           })
