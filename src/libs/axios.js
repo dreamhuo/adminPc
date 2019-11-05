@@ -1,18 +1,26 @@
 // 引入 axios
 import axios from 'axios'
+// 引入 store
 import store from '@/store'
 // import { Spin } from 'iview'
+
+// 错误收集方法
 const addErrorLog = errorInfo => {
   const { statusText, status, request: { responseURL } } = errorInfo
   let info = {
-    type: 'ajax',
-    code: status,
-    mes: statusText,
-    url: responseURL
+    type: 'ajax', // 错误类型，是ajax错误
+    code: status, // 错误状态码
+    mes: statusText, // 错误信息
+    url: responseURL // 错误url地址
   }
+  // includes() 方法用来判断一个数组是否包含一个指定的值
+  // 若当前 url 中包含 save_error_logger ， 则调用 store.dispatch 异步存到 vuex 里
+  // 存到 vuex 里只是为了在错误面板页可以看到错误
   if (!responseURL.includes('save_error_logger')) store.dispatch('addErrorLog', info)
 }
 
+// 为 ajax 请求定义一个 HttpRequest 类
+// 参数： baseURL
 class HttpRequest {
   constructor (baseUrl = baseURL) {
     this.baseUrl = baseUrl
